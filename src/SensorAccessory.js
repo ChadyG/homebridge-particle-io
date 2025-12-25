@@ -1,4 +1,4 @@
-const EventSource = require('eventsource');
+const { EventSource } = require('eventsource');
 const Accessory = require('./Accessory.js');
 
 class SensorAccessory extends Accessory {
@@ -32,6 +32,7 @@ class SensorAccessory extends Accessory {
   processEventData(e) {
     const data = JSON.parse(e.data);
     const result = this.key ? data.data.split(this.split_character)[1] : data.data;
+    this.log('Data', data);
 
     if (this.services.length < 2) {
       return;
